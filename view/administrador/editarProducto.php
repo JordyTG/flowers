@@ -6,10 +6,10 @@ and open the template in the editor.
 -->
 <?php
     session_start();
-    if(isset($_SESSION['admingeek'])){
+    if(isset($_SESSION['admin'])){
         include_once '../../model/GModel.php';
-        $user=  unserialize($_SESSION['admingeek']);
-        $gmodel=new GModel();
+        $user=  unserialize($_SESSION['admin']);
+        $gmodel=new GModel();   
     
 ?>
 <html>
@@ -73,7 +73,6 @@ and open the template in the editor.
                 <tr>
                     <td>Cod Producto: </td>
                     <td>
-                        <?php echo $objeto->getCodproducto();?>
                         <input pattern="[a-9]{5}" type="text" name="codProducto" value="<?php echo $objeto->getCodproducto(); ?>" />
                     </td>
                 </tr>
@@ -91,8 +90,8 @@ and open the template in the editor.
                 </tr>
                 <tr>
                     <td>Id. Proveedor: </td>
-                    <td><?php echo $objeto->getIdProveedor();?></td>
-                    <input type="hidden" name="idProveedor" value="<?php echo $objeto->getIdProveedor(); ?>" />    
+                    <td><?php echo $objeto->getId_proveedor();?></td>
+                    <input type="hidden" name="idProveedor" value="<?php echo $objeto->getId_proveedor(); ?>" />    
                 </tr>
                 <tr>
                     <td>Tipo Producto: </td>
