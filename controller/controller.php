@@ -34,7 +34,7 @@ switch($opcion){
         header('Location: ../view/index.php');
         break;
     case "pedir":
-        $correo=$_REQUEST['correo'];
+        $correo=$_REQUEST['email'];
         if(($gmodel->getPedidoUsuario($correo))==null){
             $gmodel->insertarPedido($correo);
         }

@@ -77,7 +77,7 @@
       <div class="container">
         <h1>@Flowers</h1>
         <p>Dise&ntilde;a tu propio regalo.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">CREAR &raquo;</a></p>
+        <p><a class="btn btn-primary btn-lg" href="personalizar.php" role="button">CREAR &raquo;</a></p>
       </div>
       
         
@@ -97,7 +97,7 @@
           <p>Codigo: <?php echo $p->getCodProducto();?></p>
           <p>Descripcion del producto: <?php echo $p->getDescripcion();?></p>
           <image class='img-rounded' width="200px" height="200px" src="img/<?php echo $p->getCodProducto();?>.jpg">  
-          <form action='../controller/controller.php'>
+          <form action='../controller/controller.php'>  
           <input type='hidden' name='codProducto' value='<?php echo $p->getCodProducto();?>'>
           <input type='hidden' name='opcion' value='pedido'>
           <p><input type='submit' class="btn btn-default" value="Comprar >>"></p>

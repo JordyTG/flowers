@@ -1,4 +1,4 @@
-<!doctype html>
+!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -6,9 +6,11 @@
     <?php
     session_start();
     include_once '../model/GModel.php';
+    include_once '../model/TipoProducto.php';
+    include_once '../model/Producto.php';
     if(isset($_SESSION['user'])){
         $user=  unserialize($_SESSION['user']);
-        $correo= $user->getCorreo();
+        $correo= $user->getEmail();
     ?>
     <head>
         <meta charset="utf-8">
@@ -48,73 +50,52 @@
         <div>
         <!--<div class="col-md-4">-->
             
-            <h1>DETALLES DE COMPRA:</h1>
+        <h1 class="text-info">Personaliza tu Regalo:</h1>
             <?php 
                 $gmodel=new GModel();
-                $pedido=$gmodel->getPedidoUsuario($correo);
-                if($pedido!=null){
-                $idPedido=$pedido->getIdPedido();
-                $lista=$gmodel->getDetalles($idPedido);
-                $subtotal=$gmodel->getSumaDetalles($lista);
-                //$nombre, $telefono, $direccion, $ruc, $tipo_gasto,$idPedido
+                $tipoProductos=$gmodel->getTipoProductos();
+                $productos=$gmodel->getProductos();
             ?>
+        <form action='../controller/controller.php'>
             <table border="1" class="table">
                 <thead>
                     <tr>
-                        <th>id_producto</th>
-                        <th>descripcion</th>
-                        <th>cantidad</th>
-                        <th>valor. unit.</th>
-                        <th>valor total</th>
-                        <th>eliminar</th>
+                        <th>Tipo de Producto</th>
+                        <th>Descripcion</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        foreach ($lista as $detalle) {
-                        
+                        foreach ($tipoProductos as $tipo) {
+                        $nombreTipoProducto=$tipo->getTipoProducto();
                     ?>                
                         
                     <tr>
-                        <td><?php echo $detalle->getCodProducto();?></td>
-                        <td><?php echo $detalle->getDescripcion();?></td>
-                        <td><?php echo $detalle->getCantidad();?></td>
-                        <td><?php echo $detalle->getValorUnit();?></td>
-                        <td><?php echo $detalle->getValorTotal();?></td>
-                        <?php echo "<td><a href='../controller/controller.php?opcion=eliminardetalle&idDetalle=".$detalle->getIdDetalles()."'><span class='glyphicon glyphicon-pencil'> Eliminar </span></a></td>";?>
+                        <td><?php echo $nombreTipoProducto;?></td>
+                        <td>
+                            <?php 
+                            foreach($productos as $producto){
+                               echo "<input type=\"radio\" name=\"".$producto->getId_producto()."\" value=\"Ninguno\" />Ninguno";
+                               if($nombreTipoProducto==$producto->getTipoProducto()){
+                                echo "<input type=\"radio\" name=\"".$producto->getId_producto()."\" value=\"".$producto->getDescripcion()."\" />".$producto->getDescripcion();
+                               }    
+                            }
+                            ?>
+                        </td>                        
                     </tr>
                     <?php
                         }
                     ?>  
                     <tr>
                         <td colspan="4">VALOR A PAGAR: </td>
-                        <td><?php echo $subtotal;?></td>
+                        <td><?php// echo $subtotal;?></td>
                     </tr>
                 </tbody>
             </table>
+            <input type="hidden" name="opcion" value='ingresarfactura'/>   
+            <input type="submit" value="Realizar Transaccion" class='btn-success'/>   
+         </form>
         </div>
-        <div>    
-            <h2>CAMPOS OBLIGATORIOS: </h2></br>
-            <form action='../controller/controller.php'>
-               <table>
-                   <tr><td>Nombre: </td><td><input type="text" name="nombre" value='' required/></td></tr> 
-                   <tr><td>RUC/CI: </td><td><input type="text" name="ruc" value='' required/></td></tr> 
-                   <tr><td>Telefono: </td><td><input type="text" name="telefono" value='' required/></td></tr> 
-                   <tr><td>Direccion: </td><td><input type="text" name="direccion" value='' required/></td></tr> 
-               </table></br>
-               <input type="hidden" name="correo" value='<?php echo $pedido->getCorreo();;?>'/>   
-               <input type="hidden" name="opcion" value='ingresarfactura'/>   
-               <input type="hidden" name="tipoGasto" value='HOGAR'/>   
-               <input type="hidden" name="idPedido" value='<?php echo $idPedido;?>'/>
-               <input type="submit" value="Realizar Transaccion" class='btn-success'/>   
-            </form>
-            
-            <?php }else{
-                echo "<h2>No hay detalles de compra que mostrar.</h2>";
-            } ?>
-        </div>
-        
-
         
         </br>
         <footer>

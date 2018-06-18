@@ -1,0 +1,17 @@
+alter table productos add tipoProducto varchar(25) not null
+
+CREATE TABLE `Categoria` (
+  `id_cat` int not null AUTO_INCREMENT,
+  `nombreCat` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`id_cat`)
+)
+
+CREATE TABLE `Ofertas` (
+  `id_oferta` int not null AUTO_INCREMENT,
+  `cod_oferta` VARCHAR(10) NOT NULL,
+  `precio` DOUBLE NOT NULL,
+  `descripcion` VARCHAR(45) NOT NULL,
+  `categoria` VARCHAR(25) NOT NULL,
+  
+  PRIMARY KEY (`id_oferta`)
+)
