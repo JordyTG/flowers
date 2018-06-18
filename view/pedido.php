@@ -7,8 +7,8 @@
     session_start();
     include_once '../model/Producto.php';
     include_once '../model/Usuario.php';
-    if(isset($_SESSION['usergeek'])){
-                $user=  unserialize($_SESSION['usergeek']);
+    if(isset($_SESSION['user'])){
+                $user=  unserialize($_SESSION['user']);
     $producto=  unserialize($_SESSION['productogeek']);
     ?>
     <head>
@@ -38,7 +38,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-form navbar-right">
-          <a class="navbar-brand">BIENVENIDO: <?php echo $user->getCorreo()?> </a>
+          <a class="navbar-brand">BIENVENIDO: <?php echo $user->getEmail()?> </a>
           <a class="navbar-brand" href="../controller/controller.php?opcion=salir">SALIR</a>
         </div>
       </div>
@@ -49,24 +49,24 @@
         
         <div class="col-md-4">
             
-            <h1><?php echo $producto->getCodProducto()?></h1>
+            <h1><?php echo $producto->getCodproducto()?></h1>
             
-            <image class='img-rounded' width="200px" height="200px" src="img/<?php echo $producto->getCodProducto();?>.jpg">  
+            <!--<image class='img-rounded' width="200px" height="200px" src="img/<?php echo $producto->getCodproducto();?>.jpg">-->  
             <form action='../controller/controller.php'>
             <table>
                 <tr>
                     <td>Cod. Producto: </td>
-                    <td><?php echo $producto->getCodProducto()?></td>
+                    <td><?php echo $producto->getId_producto()?></td>
                 </tr>
                 <tr>
                     <td>Correo: </td>
-                    <td><input type="text" name="correo" value="<?php echo $user->getCorreo()?>" readonly="readonly"/></td>
+                    <td><input type="text" name="email" value="<?php echo $user->getEmail()?>" readonly="readonly"/></td>
                 </tr>
                 <tr>
                     <td>Cantidad: </td>
                     <td><input type="number" name="cantidad" value="1" min='1' max='10'/></td>
                 </tr>
-                <input type='hidden' name='codProducto' value='<?php echo $producto->getCodProducto()?>'>
+                <input type='hidden' name='codProducto' value='<?php echo $producto->getCodproducto()?>'>
                 <input type='hidden' name='opcion' value='pedir'>
             </table></br>
             <input type="submit" value="Confirmar" class='btn-success'/>   

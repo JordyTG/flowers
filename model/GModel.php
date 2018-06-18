@@ -104,7 +104,7 @@ class GModel {
         $resultado = $pdo->query($sql);
         $listado = array();
         foreach ($resultado as $res){
-            $tipoProducto = new TipoProducto($res['id_tipoproducto'],$res['tipoproducto']);
+            $tipoProducto = new TipoProducto($res['id_tipoproducto'],$res['tipoProducto']);
             array_push($listado, $tipoProducto);
         }
         Database::disconnect();

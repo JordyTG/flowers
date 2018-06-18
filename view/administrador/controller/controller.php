@@ -8,7 +8,7 @@ $opcion = $_REQUEST['opcion'];
 
 switch($opcion){
     case "salir":
-        unset($_SESSION['admingeek']);
+        unset($_SESSION['admin']);
         header('Location: ../index.php');
         break;
     case "loginadmin":

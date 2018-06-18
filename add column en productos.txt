@@ -1,1 +1,0 @@
-alter table productos add tipoProducto varchar(25) not null
