@@ -1,0 +1,8 @@
+INSERT INTO `productos`(`id_producto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`) VALUES ('PRO01',10,'Perf. Intrepid',15.99,'PROV1');
+INSERT INTO `productos`(`id_producto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`) VALUES ('PRO02',10,'Perf. Tentation',19.99,'PROV1');
+INSERT INTO `productos`(`id_producto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`) VALUES ('PRO03',10,'Collar. XE0',17.99,'PROV1');
+INSERT INTO `productos`(`id_producto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`) VALUES ('PRO04',10,'Cig. Elec. GEO7',15.00,'PROV2');
+INSERT INTO `productos`(`id_producto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`) VALUES ('PRO05',10,'Lampara de Luces',12.00,'PROV2');
+INSERT INTO `productos`(`id_producto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`) VALUES ('PRO06',10,'Rubik 3x3. Cla',18.00,'PROV2');
+INSERT INTO `productos`(`id_producto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`) VALUES ('PRO07',10,'Peluche Usui',16.00,'PROV2');
+
