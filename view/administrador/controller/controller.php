@@ -174,6 +174,107 @@ switch($opcion){
     case "registro":
         header('Location: ../../../view/registro.php');
         break;
+        
+    // -----------------------------categoria-------//
+    
+    case "listaCategorias":
+        //obtenemos la lista de facturas:
+        $listado = $gmodel->getCategorias();
+        //y los guardamos en sesion:
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listaCategorias";
+        //redireccionamos a la pagina index para visualizar:
+        header('Location: ../index.php');
+        break;
+    
+    case "editarCategoria":
+        $objeto=$gmodel->getCategoria($_REQUEST['id_cat']);
+        $_SESSION['objeto']=serialize($objeto);
+        header('Location: ../editarCategoria.php');
+        break;
+    
+    case "actualizarCategorias": //idProveedor codigoproveedor nombre telefono email
+        $id_cat=$_REQUEST['id_cat'];
+        $nombreCat=$_REQUEST['nombreCat'];
+        $gmodel->actualizarCategoria($nombreCat, $id_cat);
+        $listado = $gmodel->getCategorias();
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listaCategorias";
+        header('Location: ../index.php');
+        break;
+    
+    case "ingresarCategoria": //
+        
+        $nombreCat=$_REQUEST['nombreCat'];
+        $gmodel->insertarCategorias($nombreCat);
+        $listado = $gmodel->getCategorias();
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listaCategorias";
+        header('Location: ../index.php');
+        break;    
+    
+    case "eliminarCategorias":
+        $gmodel->eliminarCategoria($_REQUEST['id_cat']);
+        $listado = $gmodel->getCategorias();
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listaCategorias";
+        header('Location: ../index.php');
+        break;
+    
+    
+     // -----------------------------OFERTAS-------//
+    
+    case "listarOfertas":
+        //obtenemos la lista de facturas:
+        $listado = $gmodel->getOfertas();
+        //y los guardamos en sesion:
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listarOfertas";
+        //redireccionamos a la pagina index para visualizar:
+        header('Location: ../index.php');
+        break;
+    
+    case "editarOferta":
+        $objeto=$gmodel->getOferta($_REQUEST['id_oferta']);
+        $_SESSION['objeto']=serialize($objeto);
+        header('Location: ../editarOfertas.php');
+        break;
+    
+    case "actualizarOfertas": //idProveedor codigoproveedor nombre telefono email
+        $id_oferta=$_REQUEST['id_oferta'];
+        $cod_oferta=$_REQUEST['cod_oferta'];
+        $precio=$_REQUEST['precio'];
+        $descripcion=$_REQUEST['descripcion'];
+        $categoria=$_REQUEST['categoria'];                
+        $gmodel->actualizarOferta($cod_oferta, $precio, $descripcion, $categoria, $id_oferta);
+        $listado = $gmodel->getOfertas();
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listarOfertas";
+        header('Location: ../index.php');
+        break;
+    
+    case "ingresarOfertas": //
+        
+        $cod_oferta=$_REQUEST['cod_oferta'];
+        $precio=$_REQUEST['precio'];
+        $descripcion=$_REQUEST['descripcion'];
+        $categoria=$_REQUEST['categoria'];
+        $gmodel->insertarOferta($cod_oferta, $precio, $descripcion, $categoria);
+        $listado = $gmodel->getOfertas();
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listarOfertas";
+        header('Location: ../index.php');
+        break;    
+    
+    case "eliminarOferta":
+        $gmodel->eliminarOferta($_REQUEST['id_oferta']);
+        $listado = $gmodel->getOfertas();
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listarOfertas";
+        header('Location: ../index.php');
+        break;
+    
+    
     default:
         //si no existe la opcion recibida por el controlador, siempre
         //redirigimos la navegacion a la pagina index:

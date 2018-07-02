@@ -9,7 +9,7 @@
     if(isset($_SESSION['usergeek'])){
         $user=  unserialize($_SESSION['usergeek']);
         $correo= $user->getCorreo();
-    ?>
+    ?>   
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

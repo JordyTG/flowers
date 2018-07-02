@@ -76,6 +76,15 @@ switch($opcion){
         $gmodel->eliminarDetalle($idDetalle);
         header('Location: ../view/finalizar.php');
         break;
+    
+    
+    //****************************** crud categoriaa ******* //
+    
+    
+    
+        
+    
+    
     default:
         header('Location: ../view/index.php');
 }

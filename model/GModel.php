@@ -5,6 +5,8 @@ include_once 'Proveedor.php';
 include_once 'Factura.php';
 include_once 'Producto.php';
 include_once 'Detalle.php';
+include_once 'Categorias.php';
+include_once 'Ofertas.php';
 include_once 'Pedido.php';
 include_once 'Usuario.php';
 include_once 'Administrador.php';
@@ -548,6 +550,158 @@ class GModel {
         }
         return $total;
     }
+    
+    
+    //****************************// CATALOGO
+    
+
+    
+    public function getCategorias(){
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from categoria order by id_cat";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos de tipo Proveedor:
+        $listado = array();
+        foreach ($resultado as $res){//$codproveedor, $nombre, $telefono, $email, $direccion
+            $categoria = new Categorias($res['id_cat'],$res['nombreCat']);                    
+            array_push($listado, $categoria);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $listado;
+    }
+    
+     public function eliminarCategoria($id_cat){
+        //Preparamos la conexion a la bdd:
+        $pdo=Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql="delete from categoria where id_cat=?";
+        $consulta=$pdo->prepare($sql);
+        //Ejecutamos la sentencia incluyendo a los parametros:
+        $consulta->execute(array($id_cat));
+        Database::disconnect();
+    }
+    
+    public function actualizarCategoria($nombreCat,$id_cat){
+        $pdo = Database::connect();
+        $sql = "update categoria set nombreCat=? where id_cat=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros:
+        try {
+            $consulta->execute(array($nombreCat,$id_cat));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+    
+    public function insertarCategorias($nombreCat){
+        $pdo = Database::connect();
+        $sql = "insert into categoria(nombreCat) values(?)";
+        $consulta=$pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros:
+        try{
+            $consulta->execute(array($nombreCat));
+        }  catch (PDOException $e){
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+
+
+    public function getCategoria($id_cat){
+        //Obtenemos la informacion del producto especifico:
+        $pdo = Database::connect();
+        //Utilizamos parametros para la consulta:
+        $sql = "select * from categoria where id_cat=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros para la consulta:
+        $consulta->execute(array($id_cat));
+        //Extraemos el registro especifico:
+        $dato = $consulta->fetch(PDO::FETCH_ASSOC);
+        //Transformamos el registro obtenido a objeto:
+        $categoria = new Categorias($dato['id_cat'],$dato['nombreCat']);
+        Database::disconnect();
+        return $categoria;
+    }
+    
+    //************************************** OFERTAS ****************//
+    
+    public function getOfertas(){
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from ofertas order by id_oferta";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos de tipo Proveedor:
+        $listado = array();
+        foreach ($resultado as $res){//$codproveedor, $nombre, $telefono, $email, $direccion
+            $oferta = new Ofertas($res['id_oferta'],$res['cod_oferta'],$res['precio'],$res['descripcion'],$res['categoria']);                    
+            array_push($listado, $oferta);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $listado;
+    }
+    
+     public function eliminarOferta($id_oferta){
+        //Preparamos la conexion a la bdd:
+        $pdo=Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql="delete from ofertas where id_oferta=?";
+        $consulta=$pdo->prepare($sql);
+        //Ejecutamos la sentencia incluyendo a los parametros:
+        $consulta->execute(array($id_oferta));
+        Database::disconnect();
+    }
+    
+    public function actualizarOferta($cod_oferta, $precio, $descripcion, $categoria, $id_oferta){
+        $pdo = Database::connect();
+        $sql = "update ofertas set cod_oferta=?, precio=?, descripcion=?, categoria=? where id_oferta=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros:
+        try {
+            $consulta->execute(array($cod_oferta, $precio, $descripcion, $categoria, $id_oferta));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+    
+    public function insertarOferta($cod_oferta, $precio, $descripcion, $categoria){
+        $pdo = Database::connect();
+        $sql = "insert into ofertas(cod_oferta, precio, descripcion, categoria) values(?,?,?,?)";
+        $consulta=$pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros:
+        try{
+            $consulta->execute(array($cod_oferta, $precio, $descripcion, $categoria));
+        }  catch (PDOException $e){
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+
+
+    public function getOferta($id_oferta){
+        //Obtenemos la informacion del producto especifico:
+        $pdo = Database::connect();
+        //Utilizamos parametros para la consulta:
+        $sql = "select * from ofertas where id_oferta=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros para la consulta:
+        $consulta->execute(array($id_oferta));
+        //Extraemos el registro especifico:
+        $dato = $consulta->fetch(PDO::FETCH_ASSOC);
+        //Transformamos el registro obtenido a objeto:
+        $oferta = new Ofertas($dato['id_oferta'],$dato['cod_oferta'],$dato['precio'],$dato['descripcion'],$dato['categoria']);
+        Database::disconnect();
+        return $oferta;
+    }
+    
     
     
     
