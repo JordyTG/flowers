@@ -203,8 +203,8 @@
                                     <td><select name="idProveedor">
                                             <?php
                                             $provedores = $gmodel->getProveedores();
-                                            foreach ($provedores as $p) {
-                                                echo "<option value=\"" . $p->getId_proveedor() . "\">" . $p->getCodproveedor() . "</option>";
+                                            foreach ($provedores as $ofer) {
+                                                echo "<option value=\"" . $ofer->getId_proveedor() . "\">" . $ofer->getCodproveedor() . "</option>";
                                             }
                                             ?>
                                         </select></td>

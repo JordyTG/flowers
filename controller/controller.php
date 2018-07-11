@@ -10,9 +10,9 @@ switch($opcion){
     case "registro":
         header('Location: ../view/registro.php');
         break;
-    case "pedido":
-        $productogeek=$gmodel->getProducto($_REQUEST['codProducto']);
-        $_SESSION['productogeek']=serialize($productogeek);
+    case "oferta":
+        $oferta=$gmodel->getOferta($_REQUEST['idOferta']);
+        $_SESSION['oferta']=serialize($oferta);
         header('Location: ../view/pedido.php');
         break;
     case "registrar_usuario":
@@ -42,8 +42,8 @@ switch($opcion){
         $_SESSION['pedidogeek']=  serialize($pedido);
         $_SESSION['correogeek']=$correo;////(BORRAR DESPUES DE CREAR LOGIN)NO LO OLVIDES .. CUANDO SE INICIE SESION SE CREARA UN ATRIBUTO DE SESION CORREOGEEK Y ESTA LINEA NO SERA NECESARIA
         $cantidad=$_REQUEST['cantidad'];
-        $producto=  unserialize($_SESSION['productogeek']);
-        $gmodel->insertarDetalle($pedido->getIdPedido(), $producto->getCodProducto(), $producto->getDescripcion(), $cantidad, $producto->getPrecioUnit());
+        $oferta=  unserialize($_SESSION['productogeek']);
+        $gmodel->insertarDetalle($pedido->getIdPedido(), $oferta->getCodProducto(), $oferta->getDescripcion(), $cantidad, $oferta->getPrecioUnit());
         header('Location: ../view/finalizar.php');
         break;
     //---------------------------

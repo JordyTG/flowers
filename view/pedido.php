@@ -8,8 +8,8 @@
     include_once '../model/Producto.php';
     include_once '../model/Usuario.php';
     if(isset($_SESSION['user'])){
-                $user=  unserialize($_SESSION['user']);
-    $producto=  unserialize($_SESSION['productogeek']);
+        $user=  unserialize($_SESSION['user']);
+        
     ?>
     <head>
         <meta charset="utf-8">
@@ -43,20 +43,24 @@
         </div>
       </div>
     </nav>
-
+     
         
+        <?php
+        if(isset($_SESSION['oferta'])){
+        $oferta=  unserialize($_SESSION['oferta']);    
+        ?>
     <div class="container">    
         
         <div class="col-md-4">
             
-            <h1><?php echo $producto->getCodproducto()?></h1>
+            <h1><?php echo $oferta->getCod_oferta()?></h1>
             
-            <!--<image class='img-rounded' width="200px" height="200px" src="img/<?php echo $producto->getCodproducto();?>.jpg">-->  
+            <!--<image class='img-rounded' width="200px" height="200px" src="img/<?php echo $oferta->getCodproducto();?>.jpg">-->  
             <form action='../controller/controller.php'>
             <table>
                 <tr>
                     <td>Cod. Producto: </td>
-                    <td><?php echo $producto->getId_producto()?></td>
+                    <td><?php echo $oferta->getCod_oferta()?></td>
                 </tr>
                 <tr>
                     <td>Correo: </td>
@@ -66,7 +70,7 @@
                     <td>Cantidad: </td>
                     <td><input type="number" name="cantidad" value="1" min='1' max='10'/></td>
                 </tr>
-                <input type='hidden' name='codProducto' value='<?php echo $producto->getCodproducto()?>'>
+                <input type='hidden' name='idOferta' value='<?php echo $oferta->getId_oferta()?>'>
                 <input type='hidden' name='opcion' value='pedir'>
             </table></br>
             <input type="submit" value="Confirmar" class='btn-success'/>   
@@ -74,7 +78,23 @@
             
         </div>
         
+        <?php
+        }else{
+        ?>
         
+        <h1>No has seleccionado nada aún.</h1>
+        </br>
+        <form action="index.php">
+                <table>
+                    <tr>                                        
+                    <td><input type="submit" value="VOLVER AL INICIO" class="btn btn-info"></td>                        
+                    </tr>
+                </table>
+                
+            </form>  
+        <?php
+        }
+        ?>
         </br>
         <footer>
         <p>&copy; Company 2015</p>
@@ -97,6 +117,7 @@
         </script>
     </body>
     <?php 
+    
     }else{
         header("location: login.php");
     }?>

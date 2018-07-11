@@ -88,22 +88,22 @@
       <div class="row">
       <?php
       $gmodel=new GModel();
-      $productos=$gmodel->getProductos();
-      foreach ($productos as $p) {
+      $oferta=$gmodel->getOfertas();
+      foreach ($oferta as $ofer) {
       ?>
       
         <div class="col-md-4">
-          <h4><?php echo "Precio: $".$p->getPrecioUnit();?></h4>
-          <p>Codigo: <?php echo $p->getCodProducto();?></p>
-          <p>Descripcion del producto: <?php echo $p->getDescripcion();?></p>
-          <image class='img-rounded' width="200px" height="200px" src="img/<?php echo $p->getCodProducto();?>.jpg">  
+          <h4><?php echo "Precio: $".$ofer->getPrecio();?></h4>
+          <p>Codigo: <?php echo $ofer->getCod_oferta();?></p>
+          <p>Descripcion del producto: <?php echo $ofer->getDescripcion();?></p>
+          <image class='img-rounded' width="200px" height="200px" src="img/flowers/<?php echo $ofer->getCod_oferta();?>.jpg">  
           <form action='../controller/controller.php'>  
-          <input type='hidden' name='codProducto' value='<?php echo $p->getCodProducto();?>'>
-          <input type='hidden' name='opcion' value='pedido'>
+          <input type='hidden' name='idOferta' value='<?php echo $ofer->getId_oferta();?>'>
+          <input type='hidden' name='opcion' value='oferta'>
           <p><input type='submit' class="btn btn-default" value="Comprar >>"></p>
           </form>
         </div>  
-
+          
       <?php
       }
       ?>

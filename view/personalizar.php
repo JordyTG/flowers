@@ -54,7 +54,7 @@
             <?php 
                 $gmodel=new GModel();
                 $tipoProductos=$gmodel->getTipoProductos();
-                $productos=$gmodel->getProductos();
+                $oferta=$gmodel->getProductos();
             ?>
         <form action='../controller/controller.php'>
             <table border="1" class="table">
@@ -73,14 +73,30 @@
                     <tr>
                         <td><?php echo $nombreTipoProducto;?></td>
                         <td>
+                            <table class="table-hover">
+                                <tr>    
                             <?php 
-                            foreach($productos as $producto){
-                               echo "<input type=\"radio\" name=\"".$producto->getId_producto()."\" value=\"Ninguno\" />Ninguno";
-                               if($nombreTipoProducto==$producto->getTipoProducto()){
-                                echo "<input type=\"radio\" name=\"".$producto->getId_producto()."\" value=\"".$producto->getDescripcion()."\" />".$producto->getDescripcion();
+                            
+                            foreach($oferta as $oferta){
+                            if($nombreTipoProducto==$oferta->getTipoProducto()){
+                                echo "<td>";
+                                echo "<image class='img-rounded' width=\"100px\" height=\"100px\" src=\"img/".$oferta->getCodProducto().".jpg\">";
+                                echo "</br>Descripcion: ".$oferta->getDescripcion();
+                                echo "</br>Precio: $".$oferta->getPreciounit();
+                                echo "</br><input type=\"radio\" name=\"".$nombreTipoProducto."\" value=\"".$oferta->getId_producto()."\" />";
+                                echo "</td>";
+                                
                                }    
                             }
-                            ?>
+                            echo "<td>Ninguno</br><input type=\"radio\" name=\"".$nombreTipoProducto."\" value=\"Ninguno\" /></td>";
+                            ?>    
+                                </tr>
+                            </table>
+                            
+                            <table>
+                                
+                            </table>
+
                         </td>                        
                     </tr>
                     <?php

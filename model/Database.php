@@ -13,7 +13,7 @@ class Database {
     private static $dbHost = 'localhost';
     private static $dbUsername = 'root';
     private static $dbUserPassword = '';
-    private static $port = '3306';
+    private static $port = '3307';
     //Propiedad para control de la conexion:
     private static $conexion = null;
 
