@@ -94,6 +94,7 @@
       
         <div class="col-md-4">
           <h4><?php echo "Precio: $".$ofer->getPrecio();?></h4>
+          <p>ID: <?php echo $ofer->getId_oferta();?></p>
           <p>Codigo: <?php echo $ofer->getCod_oferta();?></p>
           <p>Descripcion del producto: <?php echo $ofer->getDescripcion();?></p>
           <image class='img-rounded' width="200px" height="200px" src="img/flowers/<?php echo $ofer->getCod_oferta();?>.jpg">  

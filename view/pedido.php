@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
     <?php
     session_start();
-    include_once '../model/Producto.php';
+    include_once '../model/Ofertas.php';
     include_once '../model/Usuario.php';
     if(isset($_SESSION['user'])){
         $user=  unserialize($_SESSION['user']);
@@ -47,21 +47,17 @@
         
         <?php
         if(isset($_SESSION['oferta'])){
-        $oferta=  unserialize($_SESSION['oferta']);    
+            $oferta=  unserialize($_SESSION['oferta']);    
         ?>
     <div class="container">    
         
         <div class="col-md-4">
             
-            <h1><?php echo $oferta->getCod_oferta()?></h1>
+            <h1><?php echo $oferta->getCod_oferta();?></h1>
             
             <!--<image class='img-rounded' width="200px" height="200px" src="img/<?php echo $oferta->getCodproducto();?>.jpg">-->  
             <form action='../controller/controller.php'>
             <table>
-                <tr>
-                    <td>Cod. Producto: </td>
-                    <td><?php echo $oferta->getCod_oferta()?></td>
-                </tr>
                 <tr>
                     <td>Correo: </td>
                     <td><input type="text" name="email" value="<?php echo $user->getEmail()?>" readonly="readonly"/></td>
