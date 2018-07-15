@@ -4,13 +4,13 @@
  * @author Jordy
  */
 class Pedido {
-    private $idPedido,$fecha,$confirmacion,$correo;
+    private $idPedido,$fecha,$confirmacion,$id_usuario;
     
-    function __construct($idPedido,$fecha, $confirmacion,$correo) {
+    function __construct($idPedido,$fecha, $confirmacion,$id_usuario) {
         $this->idPedido = $idPedido;
         $this->fecha = $fecha;
         $this->confirmacion = $confirmacion;
-        $this->correo = $correo;
+        $this->$id_usuario = $id_usuario;
     }
     function getIdPedido() {
         return $this->idPedido;
@@ -24,8 +24,8 @@ class Pedido {
         return $this->confirmacion;
     }
 
-    function getCorreo() {
-        return $this->correo;
+    function getId_usuario() {
+        return $this->id_usuario;
     }
 
 

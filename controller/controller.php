@@ -11,7 +11,7 @@ switch($opcion){
         header('Location: ../view/registro.php');
         break;
     case "oferta":
-        $oferta=$gmodel->getOferta($_REQUEST['idOferta']);
+        $oferta=$gmodel->getOfertaProd($_REQUEST['idOferta']);
         $_SESSION['oferta']=serialize($oferta);
         header('Location: ../view/pedido.php');
         break;
@@ -46,6 +46,18 @@ switch($opcion){
         $gmodel->insertarDetalle($pedido->getIdPedido(), $oferta->getCodProducto(), $oferta->getDescripcion(), $cantidad, $oferta->getPrecioUnit());
         header('Location: ../view/finalizar.php');
         break;
+    case "pedirOferta":
+        $idUsuario=$_REQUEST['idUsuario'];
+        if(($gmodel->getPedidoUsuario($idUsuario))==null){
+            $gmodel->insertarPedido($idUsuario);
+        }
+        $pedido=$gmodel->getPedidoUsuario($idUsuario);
+        $_SESSION['pedidoOferta']=  serialize($pedido);
+        $cantidad=$_REQUEST['cantidad'];
+        $productoOferta=  unserialize($_SESSION['oferta']);
+        $gmodel->insertarDetalle($pedido->getIdPedido(), $productoOferta->getId_producto(), $productoOferta->getDescripcion(), $cantidad, $productoOferta->getPreciounit());
+        header('Location: ../view/finalizarOferta.php');
+        break;
     //---------------------------
     case "login":
         //obtenemos los parametros del formulario:
@@ -65,10 +77,10 @@ switch($opcion){
         header('Location: ../view/index.php');
         break;
     case "ingresarfactura":
-        $nombre=$_REQUEST['nombre']; $telefono=$_REQUEST['telefono']; $direccion=$_REQUEST['direccion']; $ruc=$_REQUEST['ruc']; $tipo_gasto=$_REQUEST['tipoGasto'];$idPedido=$_REQUEST['idPedido'];$correo=$_REQUEST['correo'];
-        $gmodel->insertarFactura($nombre, $telefono, $direccion, $ruc, $tipo_gasto,$idPedido,$correo);
+        $nombre=$_REQUEST['nombre']; $telefono=$_REQUEST['telefono']; $direccion=$_REQUEST['direccion']; $ruc=$_REQUEST['ruc']; $tipo_gasto=$_REQUEST['tipoGasto'];$idPedido=$_REQUEST['idPedido'];
+        $gmodel->insertarFactura($nombre, $telefono, $direccion, $ruc, $tipo_gasto,$idPedido);
         $facturaGeek=$gmodel->getFacturaporPedido($idPedido);
-        $_SESSION['facturaGeek']=serialize($facturaGeek);
+        $_SESSION['facturaF']=serialize($facturaGeek);
         header('Location: ../view/factura.php');
         break;
     case "eliminardetalle":

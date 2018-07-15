@@ -6,6 +6,7 @@
     <?php
     session_start();
     include_once '../model/Ofertas.php';
+    include_once '../model/Producto.php';
     include_once '../model/Usuario.php';
     if(isset($_SESSION['user'])){
         $user=  unserialize($_SESSION['user']);
@@ -53,21 +54,18 @@
         
         <div class="col-md-4">
             
-            <h1><?php echo $oferta->getCod_oferta();?></h1>
+            <h1><?php echo $oferta->getCodproducto();?></h1>
             
-            <!--<image class='img-rounded' width="200px" height="200px" src="img/<?php echo $oferta->getCodproducto();?>.jpg">-->  
+            <image class='img-rounded' width="400px" height="400px" src="img/flowers/<?php echo $oferta->getCodproducto();?>.jpg">  
             <form action='../controller/controller.php'>
             <table>
-                <tr>
-                    <td>Correo: </td>
-                    <td><input type="text" name="email" value="<?php echo $user->getEmail()?>" readonly="readonly"/></td>
-                </tr>
                 <tr>
                     <td>Cantidad: </td>
                     <td><input type="number" name="cantidad" value="1" min='1' max='10'/></td>
                 </tr>
-                <input type='hidden' name='idOferta' value='<?php echo $oferta->getId_oferta()?>'>
-                <input type='hidden' name='opcion' value='pedir'>
+                <input type='hidden' name='idUsuario' value='<?php echo $user->getId_usuario()?>'>
+                <input type='hidden' name='idOferta' value='<?php echo $oferta->getId_producto()?>'>
+                <input type='hidden' name='opcion' value='pedirOferta'>
             </table></br>
             <input type="submit" value="Confirmar" class='btn-success'/>   
             </form>

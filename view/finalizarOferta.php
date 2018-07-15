@@ -8,7 +8,7 @@
     include_once '../model/GModel.php';
     if(isset($_SESSION['user'])){
         $user=  unserialize($_SESSION['user']);
-        $correo= $user->getCorreo();
+        $idUsuario= $user->getId_usuario();
     ?>
     <head>
         <meta charset="utf-8">
@@ -51,7 +51,7 @@
             <h1>DETALLES DE COMPRA:</h1>
             <?php 
                 $gmodel=new GModel();
-                $pedido=$gmodel->getPedidoUsuario($correo);
+                $pedido=$gmodel->getPedidoUsuario($idUsuario);
                 if($pedido!=null){
                 $idPedido=$pedido->getIdPedido();
                 $lista=$gmodel->getDetalles($idPedido);
@@ -102,7 +102,7 @@
                    <tr><td>Telefono: </td><td><input type="text" name="telefono" value='' required/></td></tr> 
                    <tr><td>Direccion: </td><td><input type="text" name="direccion" value='' required/></td></tr> 
                </table></br>
-               <input type="hidden" name="idUsuario" value='<?php echo $pedido->getId_usuario();?>'/>   
+               <input type="hidden" name="correo" value='<?php echo $pedido->getId_usuario();?>'/>   
                <input type="hidden" name="opcion" value='ingresarfactura'/>   
                <input type="hidden" name="tipoGasto" value='HOGAR'/>   
                <input type="hidden" name="idPedido" value='<?php echo $idPedido;?>'/>

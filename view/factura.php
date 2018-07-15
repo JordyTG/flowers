@@ -6,9 +6,8 @@
     <?php
     session_start();
     include_once '../model/GModel.php';
-    if(isset($_SESSION['usergeek'])){
-        $user=  unserialize($_SESSION['usergeek']);
-        $correo= $user->getCorreo();
+    if(isset($_SESSION['user'])){
+        $user=  unserialize($_SESSION['user']);
     ?>   
     <head>
         <meta charset="utf-8">
@@ -37,7 +36,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-form navbar-right">
-          <a class="navbar-brand">BIENVENIDO: <?php echo $user->getCorreo()?> </a>
+          <a class="navbar-brand">BIENVENIDO: <?php echo $user->getEmail()?> </a>
           <a class="navbar-brand" href="../controller/controller.php?opcion=salir">SALIR</a>
         </div>
       </div>
@@ -52,17 +51,17 @@
           `valor_base`, `iva`, `descuento`, `total`, `id_pedido`, `confirmacion
         -->
             <?php
-            if(isset($_SESSION['facturaGeek'])){
-            $facturaGeek=  unserialize($_SESSION['facturaGeek']);
+            if(isset($_SESSION['facturaF'])){
+            $facturaGeek=  unserialize($_SESSION['facturaF']);
                 $gmodel=new GModel();
-                $lista=$gmodel->getDetalles($facturaGeek->getIdPedido());
+                $lista=$gmodel->getDetalles($facturaGeek->getId_pedido());
             ?>
             <h1>COMPRA EXITOSA:</h1>
-            
-            <table border="1">
+            <div id="Impresion">
+            <table border="1" class="table-condensed">
                 <thead>
                     <tr>
-                        <th colspan="2">Factura: <?php echo $facturaGeek->getIdFacturas();?></th>
+                        <th colspan="2">Factura: <?php echo $facturaGeek->getNum_facturas();?></th>
                         <th colspan="3">Fecha: <?php echo $facturaGeek->getFecha_emision();?></th>
                     </tr>
                     <tr>
@@ -76,8 +75,8 @@
                     </tr>
                     <tr>
                         <td>Teléfono: <?php echo $facturaGeek->getTelefono();?></td>
-                        <td colspan="2">CI/RUC: <?php echo $facturaGeek->getCi_ruc();?></td>
-                        <td colspan="2">Correo: <?php echo $facturaGeek->getCorreo();?></td>
+                        <td colspan="2">CI/RUC: <?php echo $facturaGeek->getRuc();?></td>
+                        <td colspan="2">Correo: <?php echo $user->getEmail();?></td>
                     </tr>
                     <tr>
                         <td colspan="5"> </td>
@@ -122,11 +121,30 @@
             <?php
             }
             ?>
+                
+        </div>
+            <h1><a href="javascript:imprSelec('Impresion')" class="btn-info">Imprimir</a></h1>
+        <script type="text/javascript">
+
+        function imprSelec(historial) {
+            var ficha = document.getElementById(historial);
+            var ventimp = window.open('', 'new div', 'height=500,width=900');
+            ventimp.document.write("");
+            ventimp.document.write(ficha.innerHTML);
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+        }
+
+
+
+        </script>    
+            
         </div>
         
         </br>
         <footer>
-        <p>&copy; Company 2015</p>
+        <p>&copy; Company 2018</p>
         </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

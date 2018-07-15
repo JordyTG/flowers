@@ -13,36 +13,39 @@
  * @author Jordy
  */
 class Factura {
-    private $idFacturas,$nombre,$telefono, $direccion, $ci_ruc,
-            $fecha_emision, $tipo_gasto, $valor_base, $iva, $descuento, $total,
-            $idPedido,$confirmacion, $correo;
+    private $id_facturas, $nombre, $cedula, $telefono, $direccion, $num_facturas, 
+            $ruc, $fecha_emision,$tipo_gasto, $valor_base, $iva, $descuento, $total, 
+            $id_pedido, $confirmacion;
     
-    function __construct($idFacturas, $nombre, $telefono, $direccion, $ci_ruc, $fecha_emision, $tipo_gasto, $valor_base, $iva, $descuento, $total, $idPedido, $confirmacion, $correo) {
-        $this->correo = $correo;
-        $this->idFacturas = $idFacturas;
+    function __construct($id_facturas, $nombre, $cedula, $telefono, $direccion, $num_facturas, $ruc, $fecha_emision, $tipo_gasto, $valor_base, $iva, $descuento, $total, $id_pedido, $confirmacion) {
+        $this->id_facturas = $id_facturas;
         $this->nombre = $nombre;
+        $this->cedula = $cedula;
         $this->telefono = $telefono;
         $this->direccion = $direccion;
-        $this->ci_ruc = $ci_ruc;
+        $this->num_facturas = $num_facturas;
+        $this->ruc = $ruc;
         $this->fecha_emision = $fecha_emision;
         $this->tipo_gasto = $tipo_gasto;
         $this->valor_base = $valor_base;
         $this->iva = $iva;
         $this->descuento = $descuento;
         $this->total = $total;
-        $this->idPedido = $idPedido;
+        $this->id_pedido = $id_pedido;
         $this->confirmacion = $confirmacion;
-    }
-    function getCorreo() {
-        return $this->correo;
+        
     }
 
-        function getIdFacturas() {
-        return $this->idFacturas;
+    function getId_facturas() {
+        return $this->id_facturas;
     }
 
     function getNombre() {
         return $this->nombre;
+    }
+
+    function getCedula() {
+        return $this->cedula;
     }
 
     function getTelefono() {
@@ -53,8 +56,12 @@ class Factura {
         return $this->direccion;
     }
 
-    function getCi_ruc() {
-        return $this->ci_ruc;
+    function getNum_facturas() {
+        return $this->num_facturas;
+    }
+
+    function getRuc() {
+        return $this->ruc;
     }
 
     function getFecha_emision() {
@@ -81,13 +88,14 @@ class Factura {
         return $this->total;
     }
 
-    function getIdPedido() {
-        return $this->idPedido;
+    function getId_pedido() {
+        return $this->id_pedido;
     }
 
     function getConfirmacion() {
         return $this->confirmacion;
     }
+
 
 
 

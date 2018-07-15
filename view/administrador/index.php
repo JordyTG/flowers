@@ -222,6 +222,7 @@
                                             <option value="Peluches">Peluches</option>
                                             <option value="Frutas">Frutas</option>
                                             <option value="Dulces">Dulces</option>
+                                            <option value="Oferta">Oferta</option>
                                         </select></td>
                                 </tr>
 
