@@ -120,7 +120,7 @@ switch($opcion){
     case "verfactura":
         $factura=$gmodel->getFactura($_REQUEST['idFactura']);
         $_SESSION['facturaGeek'] = serialize($factura);
-        header('Location: ../factura.php');
+        header('Location: ../verfactura.php');
         break;
     case "confirmarfactura":
         $factura=$gmodel->getFactura($_REQUEST['idFactura']);

@@ -7,8 +7,8 @@
     session_start();
     
     include_once '../../model/GModel.php';
-    if(isset($_SESSION['admingeek'])){
-        $user=  unserialize($_SESSION['admingeek']);
+    if(isset($_SESSION['admin'])){
+        $user=  unserialize($_SESSION['admin']);
         $gmodel=new GModel();
     ?>
     <head>
@@ -64,14 +64,14 @@
             if(isset($_SESSION['facturaGeek'])){
             $facturaGeek=  unserialize($_SESSION['facturaGeek']);
                 $gmodel=new GModel();
-                $lista=$gmodel->getDetalles($facturaGeek->getIdPedido());
+                $lista=$gmodel->getDetalles($facturaGeek->getId_pedido());
             ?>
             <h1>COMPRA EXITOSA:</h1>
-            
+            <div id="Impresion">
             <table border="1">
                 <thead>
                     <tr>
-                        <th colspan="2">Factura: <?php echo $facturaGeek->getIdFacturas();?></th>
+                        <th colspan="2">Factura: <?php echo $facturaGeek->getId_facturas();?></th>
                         <th colspan="3">Fecha: <?php echo $facturaGeek->getFecha_emision();?></th>
                     </tr>
                     <tr>
@@ -85,8 +85,8 @@
                     </tr>
                     <tr>
                         <td>Teléfono: <?php echo $facturaGeek->getTelefono();?></td>
-                        <td colspan="2">CI/RUC: <?php echo $facturaGeek->getCi_ruc();?></td>
-                        <td colspan="2">Correo: <?php echo $facturaGeek->getCorreo();?></td>
+                        <td colspan="2">CI/RUC: <?php echo $facturaGeek->getCedula();?></td>
+                        <td colspan="2">NUM: <?php echo $facturaGeek->getNum_facturas();?></td>
                     </tr>
                     <tr>
                         <td colspan="5"> </td>
@@ -131,7 +131,20 @@
             <?php
             }
             ?>
-        
+                </div>
+            <h1><a href="javascript:imprSelec('Impresion')" class="btn-info">Imprimir</a></h1>
+        <script type="text/javascript">
+
+        function imprSelec(historial) {
+            var ficha = document.getElementById(historial);
+            var ventimp = window.open('', 'new div', 'height=500,width=900');
+            ventimp.document.write("");
+            ventimp.document.write(ficha.innerHTML);
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+        }
+        </script>
     </div>
         
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

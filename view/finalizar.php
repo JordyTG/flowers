@@ -8,7 +8,7 @@
     include_once '../model/GModel.php';
     if(isset($_SESSION['user'])){
         $user=  unserialize($_SESSION['user']);
-        $correo= $user->getCorreo();
+        $idUsuario= $user->getId_usuario();
     ?>
     <head>
         <meta charset="utf-8">
@@ -50,9 +50,9 @@
             
             <h1>DETALLES DE COMPRA:</h1>
             <?php 
-                $gmodel=new GModel();
-                $pedido=$gmodel->getPedidoUsuario($correo);
-                if($pedido!=null){
+            $gmodel=new GModel();
+            if(isset($_SESSION['pedido'])){
+                $pedido= unserialize($_SESSION['pedido']);    
                 $idPedido=$pedido->getIdPedido();
                 $lista=$gmodel->getDetalles($idPedido);
                 $subtotal=$gmodel->getSumaDetalles($lista);
@@ -61,12 +61,12 @@
             <table border="1" class="table">
                 <thead>
                     <tr>
-                        <th>id_producto</th>
-                        <th>descripcion</th>
-                        <th>cantidad</th>
-                        <th>valor. unit.</th>
-                        <th>valor total</th>
-                        <th>eliminar</th>
+                        <th>Cod. Prod</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Valor. unit.</th>
+                        <th>Valor total</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,7 +102,7 @@
                    <tr><td>Telefono: </td><td><input type="text" name="telefono" value='' required/></td></tr> 
                    <tr><td>Direccion: </td><td><input type="text" name="direccion" value='' required/></td></tr> 
                </table></br>
-               <input type="hidden" name="idUsuario" value='<?php echo $pedido->getId_usuario();?>'/>   
+               <input type="hidden" name="correo" value='<?php echo $pedido->getId_usuario();?>'/>   
                <input type="hidden" name="opcion" value='ingresarfactura'/>   
                <input type="hidden" name="tipoGasto" value='HOGAR'/>   
                <input type="hidden" name="idPedido" value='<?php echo $idPedido;?>'/>

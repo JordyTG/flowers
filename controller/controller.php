@@ -33,18 +33,30 @@ switch($opcion){
         $gmodel->insertarUsuario($email, $password);
         header('Location: ../view/index.php');
         break;
-    case "pedir":
-        $correo=$_REQUEST['email'];
-        if(($gmodel->getPedidoUsuario($correo))==null){
-            $gmodel->insertarPedido($correo);
+    case "pedirPersonalizar":
+        $idUsuario=$_REQUEST['idUsuario'];
+        $Flores=$_REQUEST['Flores'];
+        $Dulces=$_REQUEST['Dulces'];
+        $Chocolates=$_REQUEST['Chocolates'];
+        $Peluches=$_REQUEST['Peluches'];
+        $Tarjeta=$_REQUEST['Tarjeta'];
+        $Frutas=$_REQUEST['Frutas'];
+        $listado = array();
+        if($Flores!="Ninguno"){ array_push($listado,$gmodel->getProducto($Flores));}
+        if($Dulces!="Ninguno"){ array_push($listado,$gmodel->getProducto($Dulces));}
+        if($Chocolates!="Ninguno"){ array_push($listado,$gmodel->getProducto($Chocolates));}
+        if($Peluches!="Ninguno"){ array_push($listado,$gmodel->getProducto($Peluches));}
+        if($Tarjeta!="Ninguno"){ array_push($listado,$gmodel->getProducto($Tarjeta));}
+        if($Frutas!="Ninguno"){ array_push($listado,$gmodel->getProducto($Frutas));}
+        if(($gmodel->getPedidoUsuario($idUsuario))==null){
+            $gmodel->insertarPedido($idUsuario);
         }
-        $pedido=$gmodel->getPedidoUsuario($correo);
-        $_SESSION['pedidogeek']=  serialize($pedido);
-        $_SESSION['correogeek']=$correo;////(BORRAR DESPUES DE CREAR LOGIN)NO LO OLVIDES .. CUANDO SE INICIE SESION SE CREARA UN ATRIBUTO DE SESION CORREOGEEK Y ESTA LINEA NO SERA NECESARIA
-        $cantidad=$_REQUEST['cantidad'];
-        $oferta=  unserialize($_SESSION['productogeek']);
-        $gmodel->insertarDetalle($pedido->getIdPedido(), $oferta->getCodProducto(), $oferta->getDescripcion(), $cantidad, $oferta->getPrecioUnit());
-        header('Location: ../view/finalizar.php');
+        $pedido=$gmodel->getPedidoUsuario($idUsuario);
+        $_SESSION['pedido']=  serialize($pedido);
+        foreach($listado as $producto){
+           $gmodel->insertarDetalle($pedido->getIdPedido(), $producto->getId_producto(), $producto->getDescripcion(), 1, $producto->getPreciounit());
+        }
+        header('Location: ../view/finalizarOferta.php');
         break;
     case "pedirOferta":
         $idUsuario=$_REQUEST['idUsuario'];
@@ -91,11 +103,6 @@ switch($opcion){
     
     
     //****************************** crud categoriaa ******* //
-    
-    
-    
-        
-    
     
     default:
         header('Location: ../view/index.php');

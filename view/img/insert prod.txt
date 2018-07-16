@@ -1,0 +1,25 @@
+
+
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO30', '15', 'Ferrero', '4.50', '1', 'Chocolates');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO31', '15', 'Manicho', '2.50', '1', 'Chocolates');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO32', '15', 'Hershey', '3.00', '1', 'Chocolates');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO33', '15', 'Toronto', '1.50', '1', 'Chocolates');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO34', '15', 'Bom bom', '2.50', '1', 'Chocolates');
+
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO40', '15', 'DeadPool', '4.50', '1', 'Peluches');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO41', '15', 'Jack', '3.50', '1', 'Peluches');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO42', '15', 'Halloween', '3.00', '1', 'Peluches');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO43', '15', 'Mini Oso', '3.50', '1', 'Peluches');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO44', '15', 'Mini Conejo', '2.50', '1', 'Peluches');
+
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO50', '15', 'Arriesgarse', '4.50', '1', 'Tarjeta');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO51', '15', 'Cambiar', '3.50', '1', 'Tarjeta');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO52', '15', 'Trabajar', '3.00', '1', 'Tarjeta');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO53', '15', 'Amor Locura', '3.50', '1', 'Tarjeta');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO54', '15', 'Padre', '2.50', '1', 'Tarjeta');
+
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO60', '15', 'Pequeño', '1.50', '1', 'Frutas');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO61', '15', 'Grande', '3.00', '1', 'Frutas');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO62', '15', 'Simple', '1.00', '1', 'Frutas');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO63', '15', 'Mediano', '2.50', '1', 'Frutas');
+INSERT INTO `productos` (`id_producto`, `codproducto`, `stock`, `descripcion`, `precio_unit`, `id_proveedor`, `tipoProducto`) VALUES (NULL, 'PRO64', '15', 'Surtido', '3.00', '1', 'Frutas');

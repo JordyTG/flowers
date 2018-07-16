@@ -54,7 +54,7 @@
             <?php 
                 $gmodel=new GModel();
                 $tipoProductos=$gmodel->getTipoProductos();
-                $oferta=$gmodel->getProductos();
+                $listaProductos=$gmodel->getProductos();
             ?>
         <form action='../controller/controller.php'>
             <table border="1" class="table">
@@ -76,23 +76,21 @@
                             <table class="table-hover">
                                 <tr>    
                             <?php 
-                            
-                            foreach($oferta as $oferta){
-                            if($nombreTipoProducto==$oferta->getTipoProducto()){
+                            echo "<td>Ninguno</br><input type=\"radio\" name=\"".$nombreTipoProducto."\" value=\"Ninguno\" checked /></td>";
+                            foreach($listaProductos as $producto){
+                            if($nombreTipoProducto==$producto->getTipoProducto()){
                                 echo "<td>";
-                                echo "<image class='img-rounded' width=\"100px\" height=\"100px\" src=\"img/".$oferta->getCodProducto().".jpg\">";
-                                echo "</br>Descripcion: ".$oferta->getDescripcion();
-                                echo "</br>Precio: $".$oferta->getPreciounit();
-                                echo "</br><input type=\"radio\" name=\"".$nombreTipoProducto."\" value=\"".$oferta->getId_producto()."\" />";
+                                echo "<image class='img-rounded' width=\"100px\" height=\"100px\" src=\"img/productos/".$producto->getCodProducto().".jpg\">";
+                                echo "</br>Descripcion: ".$producto->getDescripcion();
+                                echo "</br>Precio: $".$producto->getPreciounit();
+                                echo "</br><input type=\"radio\" name=\"".$nombreTipoProducto."\" value=\"".$producto->getId_producto()."\" />";
                                 echo "</td>";
-                                
                                }    
                             }
-                            echo "<td>Ninguno</br><input type=\"radio\" name=\"".$nombreTipoProducto."\" value=\"Ninguno\" /></td>";
+                            
                             ?>    
                                 </tr>
                             </table>
-                            
                             <table>
                                 
                             </table>
@@ -108,7 +106,8 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="opcion" value='ingresarfactura'/>   
+            <input type="hidden" name="idUsuario" value='<?php echo $user->getId_usuario()?>'/>   
+            <input type="hidden" name="opcion" value='pedirPersonalizar'/>   
             <input type="submit" value="Realizar Transaccion" class='btn-success'/>   
          </form>
         </div>
@@ -116,6 +115,9 @@
         </br>
         <footer>
         <p>&copy; Company 2015</p>
+        <form>                
+            <input type="button" value="volver atrás" name="volver atrás2" onclick="history.back()" />              
+        </form>
         </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

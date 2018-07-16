@@ -137,7 +137,7 @@
                                 <th>Num_Factura</th>
                                 <th>Nombre</th>
                                 <th>CI/RUC</th>
-                                <th>Correo</th>
+                                <th>Fecha</th>
                                 <th>Telefono</th>
                                 <th>Total</th>
                                 <th>Eliminar</th>
@@ -151,14 +151,14 @@
                                 $listado = unserialize($_SESSION['listadoGeek']);
                                 foreach ($listado as $obj) {
                                     echo "<tr>";
-                                    echo "<td>" . $obj->getIdFacturas() . "</td>";
+                                    echo "<td>" . $obj->getId_facturas() . "</td>";
                                     echo "<td>" . $obj->getNombre() . "</td>";
-                                    echo "<td>" . $obj->getCi_ruc() . "</td>";
-                                    echo "<td>" . $obj->getCorreo() . "</td>";
+                                    echo "<td>" . $obj->getCedula() . "</td>";
+                                    echo "<td>" . $obj->getFecha_emision() . "</td>";
                                     echo "<td>" . $obj->getTelefono() . "</td>";
                                     echo "<td>" . $obj->getTotal() . "</td>";
-                                    echo "<td><a href='controller/controller.php?opcion=eliminarfactura&idFactura=" . $obj->getIdFacturas() . "'><span class='glyphicon glyphicon-pencil'> Eliminar </span></a></td>";
-                                    echo "<td><a href='controller/controller.php?opcion=verfactura&idFactura=" . $obj->getIdFacturas() . "'><span class='glyphicon glyphicon-pencil'> Ver </span></a></td>";
+                                    echo "<td><a href='controller/controller.php?opcion=eliminarfactura&idFactura=" . $obj->getId_facturas() . "'><span class='glyphicon glyphicon-pencil'> Eliminar </span></a></td>";
+                                    echo "<td><a href='controller/controller.php?opcion=verfactura&idFactura=" . $obj->getId_facturas() . "'><span class='glyphicon glyphicon-pencil'> Ver </span></a></td>";
                                     echo "</tr>";
                                 }
                             } else {
@@ -360,7 +360,7 @@
                                 <th>id_Pedido</th>
                                 <th>fecha</th>
                                 <th>confirmacion</th>
-                                <th>correo</th>
+                                <th>idUsuario</th>
                                 <th>eliminar</th>
                             </tr>
                         </thead>
@@ -374,7 +374,7 @@
                                     echo "<td>" . $obj->getIdPedido() . "</td>";
                                     echo "<td>" . $obj->getFecha() . "</td>";
                                     echo "<td>" . $obj->getConfirmacion() . "</td>";
-                                    echo "<td>" . $obj->getCorreo() . "</td>";
+                                    echo "<td>" . $obj->getId_usuario() . "</td>";
                                     echo "<td><a href='controller/controller.php?opcion=eliminarpedido&idPedido=" . $obj->getIdPedido() . "'><span class='glyphicon glyphicon-pencil'> Eliminar </span></a></td>";
                                     echo "</tr>";
                                 }
