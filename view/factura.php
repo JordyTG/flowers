@@ -10,6 +10,9 @@
         $user=  unserialize($_SESSION['user']);
     ?>   
     <head>
+        
+        
+  
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -42,9 +45,8 @@
       </div>
     </nav></br>
 
-        
-    <div class="container">    
-        <div>
+    <center>
+    
         <!--<div class="col-md-4">-->
         <!--
         id_facturas`, `nombre`, `telefono`, `direccion`, `ci_ruc`, `fecha_emision`, `tipo_gasto`, 
@@ -123,7 +125,16 @@
             ?>
                 
         </div>
-            <h1><a href="javascript:imprSelec('Impresion')" class="btn-info">Imprimir</a></h1>
+            <br>
+            
+            <form action="javascript:imprSelec('Impresion')">
+                <input type="submit" class="btn btn-danger" value="IMPRIMIR" >
+            </form>
+            <br>
+            <form action="../view/personalizar.php">
+                <input type="submit" class="btn btn-success" value="PERSONLAIZA TU REGALO" >
+            </form>
+<!--            <h1><a href="javascript:imprSelec('Impresion')" class="btn-info">Imprimir</a></h1>-->
         <script type="text/javascript">
 
         function imprSelec(historial) {
@@ -146,7 +157,9 @@
         <footer>
         <p>&copy; Company 2018</p>
         </footer>
-    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    </div> 
+        </center>    
+        <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>

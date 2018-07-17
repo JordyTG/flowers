@@ -61,12 +61,12 @@
             <table border="1" class="table">
                 <thead>
                     <tr>
-                        <th>id_producto</th>
-                        <th>descripcion</th>
-                        <th>cantidad</th>
-                        <th>valor. unit.</th>
-                        <th>valor total</th>
-                        <th>eliminar</th>
+                        <th class="active">id_producto</th>
+                        <th class="active">descripcion</th>
+                        <th class="active">cantidad</th>
+                        <th class="active">valor. unit.</th>
+                        <th class="active">valor total</th>
+                        <th class="active">eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,7 +88,7 @@
                     ?>  
                     <tr>
                         <td colspan="4">VALOR A PAGAR: </td>
-                        <td><?php echo $subtotal;?></td>
+                        <td class="warning"><?php echo $subtotal;?></td>
                     </tr>
                 </tbody>
             </table>

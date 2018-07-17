@@ -33,6 +33,8 @@
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
+        
+        
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -60,8 +62,8 @@
             <table border="1" class="table">
                 <thead>
                     <tr>
-                        <th>Tipo de Producto</th>
-                        <th>Descripcion</th>
+                        <th class="active">Tipo de Producto</th>
+                        <th class="active">Descripcion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,7 +74,7 @@
                         
                     <tr>
                         <td><?php echo $nombreTipoProducto;?></td>
-                        <td>
+                        <td class="">
                             <table class="table-hover">
                                 <tr>    
                             <?php 
@@ -100,10 +102,10 @@
                     <?php
                         }
                     ?>  
-                    <tr>
+<!--                    <tr>
                         <td colspan="4">VALOR A PAGAR: </td>
-                        <td><?php// echo $subtotal;?></td>
-                    </tr>
+                        <td ><?php// echo $subtotal;?></td>
+                    </tr>-->
                 </tbody>
             </table>
             <input type="hidden" name="idUsuario" value='<?php echo $user->getId_usuario()?>'/>   
