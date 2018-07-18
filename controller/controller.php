@@ -1,6 +1,7 @@
 <?php
 
 require_once '../model/GModel.php';
+require_once '../lib/envioCorreo.php';
 session_start();
 $gmodel = new GModel();
 //recibimos la opcion desde la vista:
@@ -93,7 +94,15 @@ switch($opcion){
         $gmodel->insertarFactura($nombre, $telefono, $direccion, $ruc, $tipo_gasto,$idPedido);
         $facturaGeek=$gmodel->getFacturaporPedido($idPedido);
         $_SESSION['facturaF']=serialize($facturaGeek);
-        header('Location: ../view/factura.php');
+        $envio=new Email('Flowers',"ibarraanonimo@gmail.com","Feniletilamina1");
+        $user= unserialize($_SESSION['user']);
+        $envio->agregar($user->getEmail(),$user->getNombre());
+        if($envio->enviar("Factura Flowers: ".$user->getNombre(), $gmodel->getContenidoFactura($facturaGeek,$user))){
+            header('Location: ../view/factura.php');
+        }else{
+            header('Location: ../view/finalizarOferta.php');
+        }
+        
         break;
     case "eliminardetalle":
         $idDetalle=$_REQUEST['idDetalle'];

@@ -13,7 +13,74 @@ include_once 'Administrador.php';
 include_once 'ProductoProveedor.php';
 
 class GModel {
-     
+    
+    public function getContenidoFactura($factura,$user){
+        try{
+        $detalles=$this->getDetalles($factura->getId_pedido());
+        
+        
+        $contenido="<table border=\"1\">
+                <thead>
+                    <tr>
+                        <th colspan=\"2\">Factura: ".$factura->getNum_facturas()."</th>
+                        <th colspan=\"3\">Fecha: ".$factura->getFecha_emision()."</th>
+                    </tr>
+                    <tr>
+                        <td colspan=\"5\"> </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan=\"2\">Nombre: ".$factura->getNombre()."</td>
+                        <td colspan=\"3\">Direccion: ".$factura->getDireccion()."</td>
+                    </tr>
+                    <tr>
+                        <td>Teléfono: ".$factura->getTelefono()."</td>
+                        <td colspan=\"2\">CI/RUC: ".$factura->getRuc()."</td>
+                        <td colspan=\"2\">Correo: ".$user->getEmail()."</td>
+                    </tr>
+                    <tr>
+                        <td colspan=\"5\"> </td>
+                    </tr>
+                    <tr>
+                        <th colspan=\"5\" align=\"center\">DETALLES</th>
+                    </tr>
+                    <tr>
+                        <th>CodProducto</th>
+                        <th>Descripcion</th>
+                        <th>Cantidad</th>
+                        <th>ValorUnit</th>
+                        <th>ValorTotal</th>
+                    </tr>";
+        foreach ($detalles as $detalle) {
+                    $contenido=$contenido."<tr>
+                        <td>".$detalle->getCodProducto()."</td>
+                        <td>".$detalle->getDescripcion()."</td>
+                        <td>".$detalle->getCantidad()."</td>
+                        <td>".$detalle->getValorUnit()."</td>
+                        <td>".$detalle->getValorTotal()."</td>
+                    </tr>";
+        }
+        $contenido=$contenido."<tr>
+                        <th colspan=\"4\">SUBTOTAL: </th>
+                        <td>".$factura->getValor_base()."</td>
+                    </tr>
+                    <tr>
+                        <th colspan=\"4\">IVA: </th>
+                        <td>".$factura->getIva()."</td>
+                    </tr>
+                    <tr>
+                        <th colspan=\"4\">VALOR TOTAL: </th>
+                        <td>".$factura->getTotal()."</td>
+                    </tr>
+                </tbody>
+            </table>";
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+        return $contenido;
+    }
+    
     public function getUsuario($usuario, $password){
         //Obtenemos la informacion del producto especifico:
         $pdo = Database::connect();
