@@ -97,9 +97,9 @@
             <h2>CAMPOS OBLIGATORIOS: </h2></br>
             <form action='../controller/controller.php'>
                <table>
-                   <tr><td>Nombre: </td><td><input type="text" name="nombre" value='' required/></td></tr> 
-                   <tr><td>RUC/CI: </td><td><input type="text" name="ruc" value='' required/></td></tr> 
-                   <tr><td>Telefono: </td><td><input type="text" name="telefono" value='' required/></td></tr> 
+                   <tr><td>Nombre: </td><td><input type="text" pattern="[A-Za-z]+" name="nombre" value='' required/></td></tr> 
+                   <tr><td>RUC/CI: </td><td><input type="text" pattern="[0-9]{13}" name="ruc" value='' required/></td></tr> 
+                   <tr><td>Telefono: </td><td><input type="text" pattern="[0-9]{10}" name="telefono" value='' required/></td></tr> 
                    <tr><td>Direccion: </td><td><input type="text" name="direccion" value='' required/></td></tr> 
                </table></br>
                <input type="hidden" name="correo" value='<?php echo $pedido->getId_usuario();?>'/>   
