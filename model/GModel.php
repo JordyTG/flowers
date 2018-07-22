@@ -390,7 +390,7 @@ class GModel {
         foreach ($listado as $res){
             $valor_base+=$res->getValorTotal();
         }
-        $iva=0.14*$valor_base;
+        $iva=0.12*$valor_base;
         $descuento=0.0*$valor_base;
         $total=$valor_base+$iva-$descuento;
         //

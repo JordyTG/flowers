@@ -132,7 +132,7 @@
             </form>
             <br>
             <form action="../view/personalizar.php">
-                <input type="submit" class="btn btn-success" value="PERSONLAIZA TU REGALO" >
+                <input type="submit" class="btn btn-success" value="PERSONALIZA TU REGALO" >
             </form>
 <!--            <h1><a href="javascript:imprSelec('Impresion')" class="btn-info">Imprimir</a></h1>-->
         <script type="text/javascript">
