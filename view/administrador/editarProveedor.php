@@ -65,7 +65,7 @@ and open the template in the editor.
         <input type="hidden" name="opcion" value="actualizarproveedor">
         <table>
                 <tr>
-                    <td>Id Proveedor: </td>
+                    <td>Id Producto: </td>
                     <td>
                         <?php echo $objeto->getId_proveedor();?>
                         <input type="hidden" name="idProveedor" value="<?php echo $objeto->getId_proveedor(); ?>" />

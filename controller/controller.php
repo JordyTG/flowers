@@ -11,6 +11,13 @@ switch($opcion){
     case "registro":
         header('Location: ../view/registro.php');
         break;
+    case "actualizarCantidad":
+        $idDetalle=$_REQUEST['idDetalle'];
+        $cantidad=$_REQUEST['cantidad'];
+        $valorUnit=$_REQUEST['valorUnit'];
+        $gmodel->actualizarDetalle($cantidad, $valorUnit, $idDetalle);
+        header('Location: ../view/finalizarOferta.php');
+        break;
     case "oferta":
         $oferta=$gmodel->getOfertaProd($_REQUEST['idOferta']);
         $_SESSION['oferta']=serialize($oferta);
@@ -104,14 +111,56 @@ switch($opcion){
         }
         
         break;
+    
+    
+    
+    
+    //****************************** crud categoriaa ******* //
+    
+    case "editarFinalizar":
+            $idDetalles = $_REQUEST['idDetalles'];
+            $listadod = $gmodel->getDetalle($idDetalles);
+            $_SESSION['listadod']=$listadod;
+            header('Location: ../view/editarFinalizar.php');
+            break;
+        
+        
+    case "actualizar":
+            $idDetalles = $_REQUEST['idDetalles'];
+            $id_pedido = $_REQUEST['id_pedido'];
+            $id_producto = $_REQUEST['id_producto'];
+            $dscricpcion = $_REQUEST['descripcion'];          
+            $cantidad = $_REQUEST['cantidad'];            
+            $valor_unit = $_REQUEST['valor_unit'];            
+            $valor_total = $_REQUEST['valor_total'];            
+            $listadod ->edita($id_integrante, $nombre_integrante, $correo_integrante, $celular_integrante);
+            $listado = $integranteModel ->getIntegrantes();            
+            $_SESSION['listado'] = serialize($listado);            
+            header('Location: ../view/integrantes.php');
+            break;
+    
+    
+    case "actualizarDetalle": //idProveedor codigoproveedor nombre telefono email
+        //Detalle($dato['id_detalles'],$dato['id_pedido'],$dato['id_producto'],$dato['descripcion'],$dato['cantidad'],$dato['valor_unit'],$dato['valor_total']);
+        $id_producto=$_REQUEST['id_producto']; $descripcion=$_REQUEST['descripcion']; $cantidad=$_REQUEST['cantidad']; 
+        $gmodel->actualizarProveedor($codigoproveedor,$nombre ,$telefono, $email,$direccion,$idProveedor);
+        $listado = $gmodel->getProveedores();
+        $_SESSION['listadoGeek'] = serialize($listado);
+        $_SESSION['opcion']="listarproveedores";
+        header('Location: ../FinalizarOferta.php');
+        break;
+    
+    case "editardetalle":
+        $idDetalles=$_REQUEST['idDetalles'];
+        $gmodel->actualizarDetalle($idDetalles);
+        header('Location: ../view/finalizar.php');
+        break;
+    
     case "eliminardetalle":
         $idDetalle=$_REQUEST['idDetalle'];
         $gmodel->eliminarDetalle($idDetalle);
         header('Location: ../view/finalizar.php');
         break;
-    
-    
-    //****************************** crud categoriaa ******* //
     
     default:
         header('Location: ../view/index.php');

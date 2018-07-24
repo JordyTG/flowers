@@ -335,52 +335,7 @@ class GModel {
         return $pedido;
     }
 
-    public function insertarDetalle($idPedido,$idProducto,$descripcion,$cantidad,$valorUnit){
-        $pdo = Database::connect();
-        $valorTotal=$valorUnit*$cantidad;
-        $sql = "insert into Detalles(id_pedido,id_producto,descripcion,cantidad,valor_unit,valor_total) values(?,?,?,?,?,?)";
-        $consulta=$pdo->prepare($sql);
-        //Ejecutamos y pasamos los parametros:
-        try{
-            $consulta->execute(array($idPedido,$idProducto,$descripcion,$cantidad,$valorUnit,$valorTotal));
-        }  catch (PDOException $e){
-            Database::disconnect();
-            throw new Exception($e->getMessage());
-        }
-        Database::disconnect();
-    }
     
-    public function getDetalles($idPedido){
-        //obtenemos la informacion de la bdd:
-        $pdo = Database::connect();
-        $sql = "select * from Detalles where id_pedido=".$idPedido;
-        $resultado = $pdo->query($sql);
-        //transformamos los registros en objetos de tipo Factura:
-        $listado = array();
-        foreach ($resultado as $res){
-            $detalle = new Detalle($res['id_detalles'],$res['id_pedido'],$res['id_producto'],$res['descripcion'],$res['cantidad'],$res['valor_unit'],$res['valor_total']);
-            array_push($listado, $detalle);
-        }
-        Database::disconnect();
-        //retornamos el listado resultante:
-        return $listado;
-    }
-    
-    public function getDetalle($idDetalles){
-        //Obtenemos la informacion del producto especifico:
-        $pdo = Database::connect();
-        //Utilizamos parametros para la consulta:
-        $sql = "select * from Detalles where id_detalles=?";
-        $consulta = $pdo->prepare($sql);
-        //Ejecutamos y pasamos los parametros para la consulta:
-        $consulta->execute(array($idDetalles));
-        //Extraemos el registro especifico:
-        $dato = $consulta->fetch(PDO::FETCH_ASSOC);
-        //Transformamos el registro obtenido a objeto:
-        $detalle = new Detalle($dato['id_detalles'],$dato['id_pedido'],$dato['id_producto'],$dato['descripcion'],$dato['cantidad'],$dato['valor_unit'],$dato['valor_total']);
-        Database::disconnect();
-        return $detalle;
-    }
 
     public function insertarFactura($nombre, $telefono, $direccion, $ruc, 
             $tipo_gasto,$idPedido){
@@ -581,6 +536,28 @@ class GModel {
         }
         Database::disconnect();
     }
+    
+    
+
+//    public function actualizarDetalle($cantidad,$valorUnit,$idDetalles){
+//        $pdo = Database::connect();
+//        $valorTotal=$cantidad*$valorUnit;
+//        $sql = "update Detalles set cantidad=?,valor_unit=?,valor_total=? where id_detalles=?";
+//        $consulta = $pdo->prepare($sql);
+//        //Ejecutamos y pasamos los parametros:
+//        try {
+//            $consulta->execute(array($cantidad,$valorUnit,$valorTotal,$idDetalles));
+//        } catch (PDOException $e) {
+//            Database::disconnect();
+//            throw new Exception($e->getMessage());
+//        }
+//        Database::disconnect();
+//    }
+//    
+//    
+    
+    
+    
     
     public function eliminarFactura($idFacturas){
         //Preparamos la conexion a la bdd:
@@ -810,8 +787,62 @@ class GModel {
         return $oferta;
     }
     
+    //************************** Detalle
     
+    public function insertarDetalle($idPedido,$idProducto,$descripcion,$cantidad,$valorUnit){
+        $pdo = Database::connect();
+        $valorTotal=$valorUnit*$cantidad;
+        $sql = "insert into Detalles(id_pedido,id_producto,descripcion,cantidad,valor_unit,valor_total) values(?,?,?,?,?,?)";
+        $consulta=$pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros:
+        try{
+            $consulta->execute(array($idPedido,$idProducto,$descripcion,$cantidad,$valorUnit,$valorTotal));
+        }  catch (PDOException $e){
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
     
+    public function getDetalles($idPedido){
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from Detalles where id_pedido=".$idPedido;
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos de tipo Factura:
+        $listado = array();
+        foreach ($resultado as $res){
+            $detalle = new Detalle($res['id_detalles'],$res['id_pedido'],$res['id_producto'],$res['descripcion'],$res['cantidad'],$res['valor_unit'],$res['valor_total']);
+            array_push($listado, $detalle);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $listado;
+    }
     
+    public function getDetalle($idDetalles){
+        //Obtenemos la informacion del producto especifico:
+        $pdo = Database::connect();
+        //Utilizamos parametros para la consulta:
+        $sql = "select * from Detalles where id_detalles=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros para la consulta:
+        $consulta->execute(array($idDetalles));
+        //Extraemos el registro especifico:
+        $dato = $consulta->fetch(PDO::FETCH_ASSOC);
+        //Transformamos el registro obtenido a objeto:
+        $detalle = new Detalle($dato['id_detalles'],$dato['id_pedido'],$dato['id_producto'],$dato['descripcion'],$dato['cantidad'],$dato['valor_unit'],$dato['valor_total']);
+        Database::disconnect();
+        return $detalle;
+    }
+    
+    public function editarDetalles($idDetalles, $id_pedido, $id_producto, $descripcion, $cantidad, $valor_unit, $valor_total) {
+        $pdo = Database::connect();
+        $sql = "update integrantes set descripcion=?, cantidad=? where idDetalles=?";
+        $consulta = $pdo->prepare($sql);
+        $consulta->execute(array($id_pedido, $id_producto, $descripcion, $cantidad, $valor_unit, $valor_total, $idDetalles));
+        Database::disconnect();
+    }
+
     
 }

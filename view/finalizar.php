@@ -67,6 +67,7 @@
                         <th>Valor. unit.</th>
                         <th>Valor total</th>
                         <th>Eliminar</th>
+                        <th>Editar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,7 +82,8 @@
                         <td><?php echo $detalle->getCantidad();?></td>
                         <td><?php echo $detalle->getValorUnit();?></td>
                         <td><?php echo $detalle->getValorTotal();?></td>
-                        <?php echo "<td><a href='../controller/controller.php?opcion=eliminardetalle&idDetalle=".$detalle->getIdDetalles()."'><span class='glyphicon glyphicon-pencil'> Eliminar </span></a></td>";?>
+                        <?php echo "<td><a href='../controller/controller.php?opcion=eliminardetalle&idDetalles=".$detalle->getIdDetalles()."'><span class='glyphicon glyphicon-pencil'> Eliminar </span></a></td>";?>
+                        <?php echo "<td><a href='../controller/controller.php?opcion=editarFinalizar&idDetalles=" . $detalle->getIdDetalles() . "'><span class='glyphicon glyphicon-pencil'> Editar </span></a></td>";?>
                     </tr>
                     <?php
                         }

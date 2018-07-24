@@ -10,7 +10,7 @@ class Pedido {
         $this->idPedido = $idPedido;
         $this->fecha = $fecha;
         $this->confirmacion = $confirmacion;
-        $this->$id_usuario = $id_usuario;
+        $this->id_usuario = $id_usuario;
     }
     function getIdPedido() {
         return $this->idPedido;

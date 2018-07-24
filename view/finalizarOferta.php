@@ -67,12 +67,12 @@
                         <th class="active">valor. unit.</th>
                         <th class="active">valor total</th>
                         <th class="active">eliminar</th>
+                        <th class="active">editar cantidad</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        foreach ($lista as $detalle) {
-                        
+                        foreach ($lista as $detalle) {                        
                     ?>                
                         
                     <tr>
@@ -81,7 +81,18 @@
                         <td><?php echo $detalle->getCantidad();?></td>
                         <td><?php echo $detalle->getValorUnit();?></td>
                         <td><?php echo $detalle->getValorTotal();?></td>
-                        <?php echo "<td><a href='../controller/controller.php?opcion=eliminardetalle&idDetalle=".$detalle->getIdDetalles()."'><span class='glyphicon glyphicon-pencil'> Eliminar </span></a></td>";?>
+                        <?php echo "<td><a href='../controller/controller.php?opcion=eliminardetalle&idDetalle=".$detalle->getIdDetalles()."'><span class='glyphicon glyphicon-pencil'> Eliminar </span></a></td>";?>                                                
+                        <td>
+                        <form action="../controller/controller.php">
+                                <input type="hidden" name="opcion" value="actualizarCantidad">                               
+                                <input type="number" pattern="[0-9]{1-5}" name="cantidad" value="<?php echo $detalle->getCantidad()?>"> 
+                                <input type="hidden" name="idDetalle" value="<?php echo $detalle->getIdDetalles()?>"> 
+                                <input type="hidden" name="valorUnit" value="<?php echo $detalle->getValorUnit()?>"> 
+                                <input type="submit" value="Cambiar" >
+                        </form>
+                        </td>
+                            <?php echo "";?>
+                        
                     </tr>
                     <?php
                         }
@@ -98,8 +109,8 @@
             <form action='../controller/controller.php'>
                <table>
                    <tr><td>Nombre: </td><td><input type="text" pattern="[A-Za-z]+" name="nombre" value='' required/></td></tr> 
-                   <tr><td>RUC/CI: </td><td><input type="text" pattern="[0-9]{13}" name="ruc" value='' required/></td></tr> 
-                   <tr><td>Telefono: </td><td><input type="text" pattern="[0-9]{10}" name="telefono" value='' required/></td></tr> 
+                   <tr><td>RUC/CI: </td><td><input type="text" pattern="[0-9]{10-13}" name="ruc" value='' required/></td></tr> 
+                   <tr><td>Teléfono: </td><td><input type="text" pattern="[0-9]{6-10}" name="telefono" value='' required/></td></tr> 
                    <tr><td>Direccion: </td><td><input type="text" name="direccion" value='' required/></td></tr> 
                </table></br>
                <input type="hidden" name="correo" value='<?php echo $pedido->getId_usuario();?>'/>   
